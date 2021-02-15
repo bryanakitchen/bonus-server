@@ -44,16 +44,31 @@ describe('bonus-server routes', () => {
   });
 
   it('Gets an animal by Id via GET', async() => {
-    const animal = await Animal.insert({ name: 'bird', type: 'warm-blooded vertebrates', characteristic: 'feathers and beaks' });
+    const animal = await Animal.insert({ name: 'robin', type: 'bird', characteristic: 'feathers and beaks' });
     
     return request(app)
       .get(`/api/v1/animals/${animal.id}`)
       .then(res => {
         expect(res.body).toEqual({
           id: expect.any(String),
-          name: 'bird',
-          type: 'warm-blooded vertebrates',
+          name: 'robin',
+          type: 'bird',
           characteristic: 'feathers and beaks'
+        });
+      });
+  });
+
+  it('Deletes an animal by Id via DELETE', async() => {
+    const animal = await Animal.insert({ name: 'turtle', type: 'reptile', characteristic: 'protective shell' });
+    
+    return request(app)
+      .get(`/api/v1/animals/${animal.id}`)
+      .then(res => {
+        expect(res.body).toEqual({
+          id: expect.any(String),
+          name: 'turtle',
+          type: 'reptile',
+          characteristic: 'protective shell'
         });
       });
   });
