@@ -44,9 +44,7 @@ describe('bonus-server routes', () => {
   });
 
   it('Gets an animal by Id via GET', async() => {
-    const animal = await Animal.insert([
-      { name: 'bird', type: 'warm-blooded vertebrates', characteristic: 'feathers and beaks' }
-    ]);
+    const animal = await Animal.insert({ name: 'bird', type: 'warm-blooded vertebrates', characteristic: 'feathers and beaks' });
     
     return request(app)
       .get(`/api/v1/animals/${animal.id}`)
