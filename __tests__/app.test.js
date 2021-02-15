@@ -62,7 +62,7 @@ describe('bonus-server routes', () => {
     const animal = await Animal.insert({ name: 'turtle', type: 'reptile', characteristic: 'protective shell' });
     
     return request(app)
-      .get(`/api/v1/animals/${animal.id}`)
+      .delete(`/api/v1/animals/${animal.id}`)
       .then(res => {
         expect(res.body).toEqual({
           id: expect.any(String),
