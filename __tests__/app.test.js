@@ -26,4 +26,22 @@ describe('bonus-server routes', () => {
         });
       });
   });
+
+  it('Gets all animals via GET', async() => {
+    const animals = await Promise.all([
+      { name: 'lion', type: 'mammal', characteristic: 'mane' },
+      { name: 'tiger', type: 'mammal', characteristic: 'stripes' },
+      { name: 'bear', type: 'mammal', characteristic: 'hibernates' }
+    ].map(animal => Animal.insert(animal)));
+    
+    return request(app)
+      .get('/api/v1/animals')
+      .then(res => {
+        animals.forEach(animal => {
+          expect(res.body).toContainEqual(animal);
+        });
+      });
+  });
+
+
 });
