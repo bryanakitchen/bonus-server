@@ -73,5 +73,24 @@ describe('bonus-server routes', () => {
       });
   });
 
+  it('Updates an animal by Id via PUT', async() => {
+    const animal = await Animal.insert({ name: 'turtle', type: 'reptile', characteristic: 'shell' });
+    
+    return request(app)
+      .put(`/api/v1/animals/${animal.id}`)
+      .send({
+        name: 'turtle', 
+        type: 'reptile', 
+        characteristic: 'protective shell'
+      })
+      .then(res => {
+        expect(res.body).toEqual({
+          id: expect.any(String),
+          name: 'turtle',
+          type: 'reptile',
+          characteristic: 'protective shell'
+        });
+      });
+  });
 
 });
